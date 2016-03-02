@@ -4,7 +4,10 @@
 
 namespace ns3 {
 
-/* ... */
+namespace pimsm {
+void ProcessHello (void);
+
+}
 
 }
 

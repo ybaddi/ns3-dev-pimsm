@@ -10,6 +10,7 @@ def build(bld):
     module = bld.create_ns3_module('pim-sm', ['core'])
     module.source = [
         'model/pim-sm.cc',
+        'model/pim-sm-packet.cc',
         'helper/pim-sm-helper.cc',
         ]
 
@@ -22,6 +23,7 @@ def build(bld):
     headers.module = 'pim-sm'
     headers.source = [
         'model/pim-sm.h',
+        'model/pim-sm-packet.h',
         'helper/pim-sm-helper.h',
         ]
 
