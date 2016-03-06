@@ -10,7 +10,7 @@ def build(bld):
     module = bld.create_ns3_module('pim-sm', ['core'])
     module.source = [
         'model/pim-sm.cc',
-        'model/pim-sm-packet.cc',
+        'model/pim-sm-header.cc',
         'helper/pim-sm-helper.cc',
         ]
 
@@ -23,12 +23,12 @@ def build(bld):
     headers.module = 'pim-sm'
     headers.source = [
         'model/pim-sm.h',
-        'model/pim-sm-packet.h',
+        'model/pim-sm-header.h',
         'helper/pim-sm-helper.h',
         ]
 
     if bld.env.ENABLE_EXAMPLES:
         bld.recurse('examples')
 
-    # bld.ns3_python_bindings()
+    bld.ns3_python_bindings()
 
