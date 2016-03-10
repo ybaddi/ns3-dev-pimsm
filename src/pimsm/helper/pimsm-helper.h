@@ -2,12 +2,15 @@
 #ifndef PIM_SM_HELPER_H
 #define PIM_SM_HELPER_H
 
-#include "ns3/object-factory.h"
+#include "ns3/ipv4.h"
+#include "ns3/ipv4-static-routing.h"
+#include "ns3/ptr.h"
+#include "ns3/ipv4-address.h"
 #include "ns3/node.h"
+#include "ns3/net-device.h"
+#include "ns3/ipv4-routing-helper.h"
 #include "ns3/node-container.h"
-#include "ns3/ipv4-static-routing-helper.h"
-#include <map>
-#include <set>
+#include "ns3/net-device-container.h"
 
 namespace ns3 {
 
@@ -47,7 +50,7 @@ namespace ns3 {
          * This method is mainly for internal use by the other helpers;
          * clients are expected to free the dynamic memory allocated by this method
          */
-        //PimsmHelper* Copy (void) const;
+        PimsmHelper* Copy (void) const;
 
         /**
     * \param node the node for which an exception is to be defined
@@ -63,7 +66,7 @@ namespace ns3 {
    *
    * This method will be called by ns3::InternetStackHelper::Install
    */
-        //virtual Ptr<Ipv4RoutingProtocol> Create (Ptr<Node> node) const;
+        virtual Ptr<Ipv4RoutingProtocol> Create (Ptr<Node> node) const;
 
         /**
          * \param name the name of the attribute to set
@@ -85,6 +88,15 @@ namespace ns3 {
          * \return the number of stream indices assigned by this helper
          */
         //int64_t AssignStreams (NodeContainer c, int64_t stream);
+
+        void AddMulticastRoute(Ptr< Node > 	n,
+                               Ipv4Address 	source,
+                               Ipv4Address 	group,
+                               Ptr<NetDevice> 	input,
+                               NetDeviceContainer 	output );
+
+        void SetDefaultMulticastRoute	(Ptr<Node> 	n, Ptr< NetDevice > 	nd
+        );
 
     private:
         PimsmHelper &operator = (const PimsmHelper &);

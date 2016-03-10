@@ -11,6 +11,7 @@ def build(bld):
     module.source = [
         'model/pimsm.cc',
         'model/pimsm-header.cc',
+        'model/pim-multicast-forwarding-cache.cc',
         'helper/pimsm-helper.cc',
         ]
 
@@ -24,6 +25,7 @@ def build(bld):
     headers.source = [
         'model/pimsm.h',
         'model/pimsm-header.h',
+        'model/pim-multicast-forwarding-cache.h',
         'helper/pimsm-helper.h',
         ]
 

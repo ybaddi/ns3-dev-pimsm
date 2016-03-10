@@ -11,28 +11,32 @@
 namespace ns3 {
 
 
-
-    PimsmHelper::PimsmHelper ()
-    {
+    PimsmHelper::PimsmHelper() {
 
     }
 
 
+    PimsmHelper::~PimsmHelper() {
 
-    PimsmHelper::~PimsmHelper ()
-    {
+    }
+
+    PimsmHelper* PimsmHelper::Copy (void) const{
+        return new PimsmHelper (*this);
+    }
+
+    Ptr<Ipv4RoutingProtocol> PimsmHelper::Create (Ptr<Node> node) const{
+        return NULL;
+    }
+
+    void PimsmHelper::AddMulticastRoute(Ptr< Node > 	n, Ipv4Address source, Ipv4Address group, Ptr <NetDevice> input,
+                                        NetDeviceContainer output) {
+
+    }
+
+    void PimsmHelper::SetDefaultMulticastRoute(Ptr <Node> n, Ptr <NetDevice> nd) {
 
     }
 
 
-
-
-
-
-
-
-
-
-
-    }
+}
 
