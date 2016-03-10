@@ -23,7 +23,7 @@ are defined in the file ``replace.txt``.
 Model Description
 *****************
 
-The source code for the new module lives in the directory ``src/pim-sm``.
+The source code for the new module lives in the directory ``src/pimsm``.
 
 Add here a basic description of what is being modeled.
 

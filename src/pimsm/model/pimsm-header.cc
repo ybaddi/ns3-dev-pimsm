@@ -1,4 +1,4 @@
-#include "pim-sm-header.h"
+#include "pimsm-header.h"
 
 #include "ns3/log.h"
 

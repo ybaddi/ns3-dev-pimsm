@@ -7,24 +7,24 @@
 #     conf.check_nonfatal(header_name='stdint.h', define_name='HAVE_STDINT_H')
 
 def build(bld):
-    module = bld.create_ns3_module('pim-sm', ['core'])
+    module = bld.create_ns3_module('pimsm', ['core','csma','internet','applications'])
     module.source = [
-        'model/pim-sm.cc',
-        'model/pim-sm-header.cc',
-        'helper/pim-sm-helper.cc',
+        'model/pimsm.cc',
+        'model/pimsm-header.cc',
+        'helper/pimsm-helper.cc',
         ]
 
-    module_test = bld.create_ns3_module_test_library('pim-sm')
+    module_test = bld.create_ns3_module_test_library('pimsm')
     module_test.source = [
-        'test/pim-sm-test-suite.cc',
+        'test/pimsm-test-suite.cc',
         ]
 
     headers = bld(features='ns3header')
-    headers.module = 'pim-sm'
+    headers.module = 'pimsm'
     headers.source = [
-        'model/pim-sm.h',
-        'model/pim-sm-header.h',
-        'helper/pim-sm-helper.h',
+        'model/pimsm.h',
+        'model/pimsm-header.h',
+        'helper/pimsm-helper.h',
         ]
 
     if bld.env.ENABLE_EXAMPLES:
