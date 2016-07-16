@@ -13,23 +13,76 @@
 namespace ns3 {
 namespace pimsm {
 
-	class PIMSMHeader: public Header
-	{
-	public:
-	    // must be implemented to become a valid new header.
-	    static TypeId GetTypeId (void);
-	    virtual TypeId GetInstanceTypeId (void) const;
-	    virtual uint32_t GetSerializedSize (void) const;
-	    virtual void Serialize (Buffer::Iterator start) const;
-	    virtual uint32_t Deserialize (Buffer::Iterator start);
-	    virtual void Print (std::ostream &os) const;
+enum MessageType
+{
+  PIMSMTYPE_PIMHELLO  = 0,   //!< PIMSMTYPE_PIMHELLO
+};
 
-	    // allow protocol-specific access to the header data.
-	    void SetData (uint32_t data);
-	    uint32_t GetData (void) const;
-	private:
-	    uint32_t m_data;
-	};
+
+/**
+* \ingroup aodv
+* \brief   Route Request (RREQ) Message Format
+  \verbatim
+  0                   1                   2                   3
+  0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+  |PIM Ver| Type  |   Reserved    |           Checksum            |
+  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+  \endverbatim
+
+  PIM Ver
+         PIM Version number is 2.
+
+   Type
+         Types for specific PIM messages.  PIM Types are:
+
+   Message Type                          Destination
+   ---------------------------------------------------------------------
+   0 = Hello                             Multicast to ALL-PIM-ROUTERS
+   1 = Register                          Unicast to RP
+   2 = Register-Stop                     Unicast to source of Register
+                                            packet
+   3 = Join/Prune                        Multicast to ALL-PIM-ROUTERS
+   4 = Bootstrap                         Multicast to ALL-PIM-ROUTERS
+   5 = Assert                            Multicast to ALL-PIM-ROUTERS
+   6 = Graft (used in PIM-DM only)       Unicast to RPF'(S)
+   7 = Graft-Ack (used in PIM-DM only)   Unicast to source of Graft
+                                            packet
+   8 = Candidate-RP-Advertisement        Unicast to Domain's BSR
+*/
+
+
+class PIMSMHeader: public Header {
+public:
+	PIMSMHeader (MessageType t = PIMSMTYPE_PIMHELLO);
+	// must be implemented to become a valid new header.
+	static TypeId GetTypeId(void);
+	virtual TypeId GetInstanceTypeId(void) const;
+	virtual uint32_t GetSerializedSize(void) const;
+	virtual void Serialize(Buffer::Iterator start) const;
+	virtual uint32_t Deserialize(Buffer::Iterator start);
+	virtual void Print(std::ostream &os) const;
+
+	// allow protocol-specific access to the header data.
+	void SetData(uint32_t data);
+	uint32_t GetData(void) const;
+
+	/// Return type
+	MessageType Get() const {
+		return m_type;
+	}
+	/// Check that type if valid
+	bool IsValid() const {
+		return m_valid;
+	}
+	bool operator==(PIMSMHeader const & o) const;
+private:
+	MessageType m_type;
+	bool m_valid;
+	uint32_t m_data;
+};
+
+std::ostream & operator<< (std::ostream & os, PIMSMHeader const & h);
 
 }
 }
