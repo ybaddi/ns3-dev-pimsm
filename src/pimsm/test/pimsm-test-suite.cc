@@ -57,7 +57,7 @@ public:
 };
 
 PimSmTestSuite::PimSmTestSuite ()
-  : TestSuite ("pim-sm", UNIT)
+  : TestSuite ("pimsm", UNIT)
 {
   // TestDuration for TestCase can be QUICK, EXTENSIVE or TAKES_FOREVER
   AddTestCase (new PimSmTestCase1, TestCase::QUICK);
